@@ -1,0 +1,15 @@
+Metadata-Version: 1.1
+Name: uiocat
+Version: 1.0.0
+Summary: UiOcat
+Home-page: UNKNOWN
+Author: Nicolai Haaber Junge
+Author-email: <nicolai.junge@outlook.com>
+License: UNKNOWN
+Description: A python package for working with catalytic data in Jupyter Lab/Notebook
+Keywords: python,catalysis,UniversityOfOslo
+Platform: UNKNOWN
+Classifier: Intended Audience :: Education
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
