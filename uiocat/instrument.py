@@ -32,7 +32,6 @@ class GC_Instrument:
         name : instrument name (found in "instrument:lib/")
         measurment_offset : offset time from start of reactant gas feeding to start of GC sampling (minutes)
         """
-        #self.instrument_libary_loc =  os.path.join(pathlib.Path(__file__).parent, 'instrument_lib')
         self.name = name  # name of the instrument
         self.instrument_config = self.fetch_instrument_config()  #  Fetches the instrument config
         self.measurment_offset = measurment_offset  # Sets the measurment offset
@@ -49,7 +48,7 @@ class GC_Instrument:
         try:
             return json.load(stream)
         except:
-            raise AssertionError("Your reaction is not defined")
+            raise Exception("Your reaction is not defined")
 
 
     def instrument_exists(self, name, directory):

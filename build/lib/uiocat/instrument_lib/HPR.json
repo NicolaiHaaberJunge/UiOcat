@@ -1,0 +1,21 @@
+{
+    "Response_Factors": {
+        "methanol" : 0.82,
+        "dme" : 0.58,
+        "aromatics" : 1.17,
+        "c7+" : 1.17,
+        "heptane" : 1.17,
+        "octene" : 1.17,
+        "benzene" : 1.17,
+        "toluene" : 1.17,
+        "p-xylene" : 1.17,
+        "m-xylene" : 1.17,
+        "o-xylene" : 1.17,
+        "propylbenzene" : 1.17,
+        "1,2,3,5-tetramethylbenzene" : 1.17,
+        "ethyltoluene" : 1.17,
+        "1,2,4-trimethylbenzene" : 1.17,
+        "1,2,3-trimethylbenzene" : 1.17,
+        "1,2,3,4-tetramethylbenzene" : 1.17
+    }
+}

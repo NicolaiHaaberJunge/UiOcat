@@ -19,11 +19,7 @@ class Reaction:
 
         """
         self.reaction_type = reac
-
-        #self.reaction_libary_loc = os.path.join(pathlib.Path(__file__).parent, 'reaction_lib')
-
         self.reaction = self.fetch_reaction_compounds()
-
         self.feed = self.reaction['feed'] # The feed compounds of the reaction (reactants)
         self.reaction_compounds = self.reaction['products'] # The reaction compounds (products).
 
@@ -36,16 +32,7 @@ class Reaction:
         try:
             return json.load(stream)
         except:
-            raise AssertionError("Your reaction is not defined")
-        
-        # return json.load(stream)
-        # if self.reaction_exists(self.type, self.reaction_libary_loc):  # Checks if the reaction name exists
-        #     json_file = os.path.join(self.reaction_libary_loc, self.type +'.json')
-        #     with open(json_file) as js_data: 
-        #         reacton_dict = json.load(js_data) 
-        #         return reacton_dict  # returns the json reaction file as a python dictionary.
-        # else:
-        #     raise Exception("Your reaction is not defined") 
+            raise Exception("Your reaction is not defined")
 
     def reaction_to_lib(self, name=None, reaction_dict=None): 
         """
@@ -83,9 +70,7 @@ class ReactionSetup:
     """
     Class which returns an interactive dashboard for quickly calculating WHSV and Flow rates.
     """
-
     stream = pkg_resources.resource_stream(__name__, 'antoine_coef_lib\\antoine_coef.json')
-    #__path_to_antoine_lib =  os.path.join(pathlib.Path(__file__).parent, 'antoine_coef_lib\antoine_coef.json') #r'pycat\antoine_coef_lib\antoine_coef.json'
 
     Psat_vapour = 0
     F_HeToTank = 0

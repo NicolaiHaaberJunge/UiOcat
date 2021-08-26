@@ -11,6 +11,7 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 import xlrd
+import pkg_resources
 
 ######################
 # GC Instrument Class
@@ -22,8 +23,6 @@ class GC_Instrument:
     GC instrument parent class. This mainly adds som utility functions such as
     being able to add instrument configurations. Not strictly necessary currently
     but may be usefull in the future.
-
-
     '''
 
     def __init__(self, name='default', measurment_offset=0):
@@ -33,7 +32,6 @@ class GC_Instrument:
         name : instrument name (found in "instrument:lib/")
         measurment_offset : offset time from start of reactant gas feeding to start of GC sampling (minutes)
         """
-        self.instrument_libary_loc = r'pycat\instrument_lib'  # Location of the instrument config files.
         self.name = name  # name of the instrument
         self.instrument_config = self.fetch_instrument_config()  #  Fetches the instrument config
         self.measurment_offset = measurment_offset  # Sets the measurment offset
@@ -45,13 +43,13 @@ class GC_Instrument:
         """
         Fetches the instrument configurations such as response_factors etc.
         """
-        if self.instrument_exists(self.name, self.instrument_libary_loc):
-            json_file = os.path.join(self.instrument_libary_loc, self.name +'.json')
-            with open(json_file) as js_data: 
-                instrument_dict = json.load(js_data) 
-                return instrument_dict
-        else:
-            raise Exception("Your reaction is not defined") 
+        stream = pkg_resources.resource_stream(__name__, 'instrument_lib\\{}.json'.format(self.name))
+
+        try:
+            return json.load(stream)
+        except:
+            raise Exception("Your reaction is not defined")
+
 
     def instrument_exists(self, name, directory):
         """
