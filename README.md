@@ -42,7 +42,7 @@ from uiocat.instrument import CoFeedRig, HighPressureRig
 ```
 mth = Reaction(reac='mth')
 ```
-3. Choose a test rig instrument and load the reaction and raw GC data from your instrument (.csv file).
+3. Choose a test rig instrument and load raw GC data from your instrument (.csv file).
 ```
 cofeed = CoFeedRig(data_file)
 ```
