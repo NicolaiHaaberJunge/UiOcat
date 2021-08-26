@@ -58,14 +58,7 @@ analysis.export_to_excel()
 ```
 ## Dashboards
 
-UiOcat comes with pre-configured Jupyter dashboards. These are best used
-with [Voila](https://voila.readthedocs.io/en/stable/using.html)
-
-```
-voila AnalysisDashboard.ipynb
-```
-
-![image](https://user-images.githubusercontent.com/70808555/130935900-980394ff-b4b8-44f6-b2b8-bebaa4eab7d7.png)
+Two pre-configured notebook dashboards are available from [UiOcat-Dashboards](https://github.com/NicHaaJun/UiOcat-Dashboards).
 
 
 
