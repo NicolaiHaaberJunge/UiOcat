@@ -9,7 +9,7 @@ import pandas as pd
 import ipywidgets as widgets
 from ipywidgets import Output, HBox, VBox, fixed, interactive, FloatSlider, Layout, Label
 from IPython.display import display
-
+import pkg_resources
 
 class Reaction:
 
@@ -18,24 +18,34 @@ class Reaction:
         INPUTS:
 
         """
-        self.type = reac
-        self.reaction_libary_loc = r'pycat\reaction_lib'
+        self.reaction_type = reac
+
+        #self.reaction_libary_loc = os.path.join(pathlib.Path(__file__).parent, 'reaction_lib')
+
         self.reaction = self.fetch_reaction_compounds()
+
         self.feed = self.reaction['feed'] # The feed compounds of the reaction (reactants)
         self.reaction_compounds = self.reaction['products'] # The reaction compounds (products).
 
     def __str__(self):
-        return 'Reaction: {}, Feed: {}'.format(self.type, ', '.join(self.feed))
+        return 'Reaction: {}, Feed: {}'.format(self.reaction_type, ', '.join(self.feed))
 
     def fetch_reaction_compounds(self):
+        stream = pkg_resources.resource_stream(__name__, 'reaction_lib\\{}.json'.format(self.reaction_type))
 
-        if self.reaction_exists(self.type, self.reaction_libary_loc):  # Checks if the reaction name exists
-            json_file = os.path.join(self.reaction_libary_loc, self.type +'.json')
-            with open(json_file) as js_data: 
-                reacton_dict = json.load(js_data) 
-                return reacton_dict  # returns the json reaction file as a python dictionary.
-        else:
-            raise Exception("Your reaction is not defined") 
+        try:
+            return json.load(stream)
+        except:
+            raise AssertionError("Your reaction is not defined")
+        
+        # return json.load(stream)
+        # if self.reaction_exists(self.type, self.reaction_libary_loc):  # Checks if the reaction name exists
+        #     json_file = os.path.join(self.reaction_libary_loc, self.type +'.json')
+        #     with open(json_file) as js_data: 
+        #         reacton_dict = json.load(js_data) 
+        #         return reacton_dict  # returns the json reaction file as a python dictionary.
+        # else:
+        #     raise Exception("Your reaction is not defined") 
 
     def reaction_to_lib(self, name=None, reaction_dict=None): 
         """
@@ -73,7 +83,9 @@ class ReactionSetup:
     """
     Class which returns an interactive dashboard for quickly calculating WHSV and Flow rates.
     """
-    __path_to_antoine_lib = r'pycat\antoine_coef_lib\antoine_coef.json'
+
+    stream = pkg_resources.resource_stream(__name__, 'antoine_coef_lib\\antoine_coef.json')
+    #__path_to_antoine_lib =  os.path.join(pathlib.Path(__file__).parent, 'antoine_coef_lib\antoine_coef.json') #r'pycat\antoine_coef_lib\antoine_coef.json'
 
     Psat_vapour = 0
     F_HeToTank = 0
@@ -88,7 +100,7 @@ class ReactionSetup:
         print('Tool for setting up reactions with liquid feed')
 
     def calculator(self):
-        df = pd.read_json(self.__path_to_antoine_lib).round(3)
+        df = pd.read_json(self.stream).round(3)
         self.data = df
         compounds = df.index.to_list()
 

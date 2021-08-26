@@ -23,5 +23,8 @@ setup(
             "Programming Language :: Python :: 3",
             "Operating System :: MacOS :: MacOS X",
             "Operating System :: Microsoft :: Windows"
-        ]
+        ],
+        include_package_data=True,
+        package_data={'': ['antoine_coef_lib/*.json', 'instrument_lib/*.json', 'reaction_lib/*.json']}
+
 )
