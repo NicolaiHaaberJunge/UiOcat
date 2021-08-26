@@ -4,7 +4,8 @@
 * [Purpose](#purpose)
 * [Installation](#installation)
 * [How-To](#how-to)
-
+* [Dashboards](#dashboards)
+* 
 ## General
 
 UiOcat is a python package to be used within the Jupyter environment for 
@@ -55,4 +56,13 @@ analysis = GC_Analysis(reaction=MTH, instrument=cofeed)
 analysis.results()
 analysis.export_to_excel()
 ```
+## Dashboards
+
+UiOcat comes with pre-configured Jupyter dashboards. These are best used
+with [Voila](https://voila.readthedocs.io/en/stable/using.html)
+
+```
+voila AnalysisDashboard.ipynb
+```
+
 
