@@ -65,4 +65,7 @@ with [Voila](https://voila.readthedocs.io/en/stable/using.html)
 voila AnalysisDashboard.ipynb
 ```
 
+![image](https://user-images.githubusercontent.com/70808555/130935900-980394ff-b4b8-44f6-b2b8-bebaa4eab7d7.png)
+
+
 
