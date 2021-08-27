@@ -45,7 +45,9 @@ MTH = Reaction(reac='mth')
 3. Choose a test rig instrument and load raw GC data from your instrument (.csv file).
 ```
 cofeed = CoFeedRig(data_file)
+highP_rig = HighPressureRig(data_file)
 ```
+
 4. Choose the type of analysis and provide the reaction and instrument.
 ```
 analysis = GC_Analysis(reaction=MTH, instrument=cofeed)
