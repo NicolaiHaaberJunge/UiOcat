@@ -21,7 +21,7 @@ test rigs.
 
 ## Installation
 
-With a python environment configures (conda or pipenv), clone the repo and simply:
+With a python environment configured (conda or pipenv), clone the repo and simply:
 
 ```
 cd UiOcat
