@@ -6,7 +6,6 @@ LONG_DESCRIPTION = 'A python package for working with catalytic data in Jupyter 
 
 # Setting up
 setup(
-       # the name must match the folder name 'verysimplemodule'
         name="uiocat", 
         version=VERSION,
         author="Nicolai Haaber Junge",
@@ -14,16 +13,9 @@ setup(
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
-        install_requires=['pandas', 'matplotlib', 'xlrd', 'ipywidgets'], # add any additional packages that 
-        # needs to be installed along with your package. Eg: 'caer'
+        install_requires=['pandas', 'matplotlib', 'xlrd', 'ipywidgets', 'ipympl'],
         
         keywords=['python', 'catalysis', 'UniversityOfOslo'],
-        classifiers= [
-            "Intended Audience :: Education",
-            "Programming Language :: Python :: 3",
-            "Operating System :: MacOS :: MacOS X",
-            "Operating System :: Microsoft :: Windows"
-        ],
         include_package_data=True,
         package_data={'': ['antoine_coef_lib/*.json', 'instrument_lib/*.json', 'reaction_lib/*.json']}
 
