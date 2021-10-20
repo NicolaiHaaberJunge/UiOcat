@@ -118,44 +118,55 @@ class GC_Analysis:
         yield_output = widgets.Output()
 
         with area_sum_output:
+            fig_area, ax_area = plt.subplots()
+
             if self.instrument.raw_data.shape[0] == 1:
                 bar_width = 0.05
             else: 
                 bar_width = 0.4
-            area_plot = self.area_sum().reset_index(drop=True).plot(kind='bar',legend=False, ylabel='Counts', xlabel='Injection No.',
-                                                                        title='Area Sum', rot=0, width=bar_width)
+            self.area_sum().reset_index(drop=True).plot(kind='bar',legend=False, ylabel='Counts', xlabel='Injection No.',
+                                                                        title='Area Sum', rot=0, width=bar_width, ax=ax_area)
             if self.instrument.raw_data.shape[0] > 20:
-                area_plot.xaxis.set_major_locator(MaxNLocator(20))
+                ax_area.xaxis.set_major_locator(MaxNLocator(20))
+                
+            plt.show(fig_area)
 
         with conv_output:
-                if self.instrument.raw_data.shape[0] == 1:
-                    conversion_plot = self.calc_conversion().iloc[::1,:].plot(kind='bar', title='Conversion', 
-                                                        legend=False, ylabel='Conversion (%)',
-                                                        xlabel='TOS (h)', rot=0, width=0.05, ylim=(0, 100))
-                else:
-                    conversion_plot = self.calc_conversion().iloc[0::1,:].plot(ls="-", marker="o", title='Conversion', 
-                                                        grid=True, legend=False, ylabel='Conversion (%)', ylim=(0, 105),
-                                                        xlabel='TOS (h)')
+            fig_conv, ax_conv = plt.subplots()
+            if self.instrument.raw_data.shape[0] == 1:
+                self.calc_conversion().iloc[::1,:].plot(kind='bar', title='Conversion', 
+                                                    legend=False, ylabel='Conversion (%)',
+                                                    xlabel='TOS (h)', rot=0, width=0.05, ylim=(0, 100), ax=ax_conv)
+            else:
+                self.calc_conversion().iloc[0::1,:].plot(ls="-", marker="o", title='Conversion', 
+                                                    grid=True, legend=False, ylabel='Conversion (%)', ylim=(0, 105),
+                                                    xlabel='TOS (h)', ax=ax_conv)
+            plt.show(fig_conv)
 
         with selc_output:
+            fig_selc, ax_selc = plt.subplots()
             if self.instrument.raw_data.shape[0] == 1:
-                plot_selec = self.calc_selectivity().plot(kind='bar', stacked=True, rot=0, width=0.05, title='Selectivity',
+                self.calc_selectivity().plot(kind='bar', stacked=True, rot=0, width=0.05, title='Selectivity',
                                                         xlabel='TOS (h)',
-                                                        ylabel='Selectivity. (%)')
+                                                        ylabel='Selectivity. (%)', ax=ax_selc)
             else:
-                plot_selec = self.calc_selectivity().iloc[0::2,:].plot(ls="-", marker="<", ms=6,  grid=True, title='Selectivity',
+                self.calc_selectivity().iloc[0::2,:].plot(ls="-", marker="<", ms=6,  grid=True, title='Selectivity',
                                                         xlabel='TOS (h)',
-                                                        ylabel='Selectivity. (%)')
-            plot_selec.set_ylim(0, 100)
+                                                        ylabel='Selectivity. (%)', ax=ax_selc)
+            ax_selc.set_ylim(0, 100)
+            plt.show(fig_selc)
+
         with yield_output:
+            fig_yield, ax_yield = plt.subplots()
             if self.instrument.raw_data.shape[0] == 1:  
-                yield_plot = self.calc_yield().plot(kind='bar', stacked=True, rot=0, width=0.05,
-                                                        ylabel='Yield (%)', xlabel='TOS (h)')
+                self.calc_yield().plot(kind='bar', stacked=True, rot=0, width=0.05,
+                                                        ylabel='Yield (%)', xlabel='TOS (h)', ax=ax_yield)
             else:
-                yield_plot = self.calc_yield().iloc[0::2,:].plot(ls="-", marker="<", ms=6, title='Yield', grid=True,
-                                                    ylabel='Yield (%)', xlabel='TOS (h)')
+                self.calc_yield().iloc[0::2,:].plot(ls="-", marker="<", ms=6, title='Yield', grid=True,
+                                                    ylabel='Yield (%)', xlabel='TOS (h)', ax=ax_yield)
             
-            yield_plot.set_ylim(0, 100)
+            ax_yield.set_ylim(0, 100)
+            plt.show(fig_yield)
             
         Row_1 = widgets.HBox([area_sum_output, conv_output])
         Row_2 = widgets.HBox([yield_output, selc_output])
